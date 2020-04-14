@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wallet</title>
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+<div class="container-fluid h-100">
+    <div class="row justify-content-center h-100 w-100">
+        <div class="col-md-2 wallets_column">
+            <ul class="wallets">
+                <li>
+                    <div class="wallet">
+                        <span>Title: </span> <span class="title">First</span> <br>
+                        <span>Amount: </span> <span class="amount">123.334</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="create_wallet">+</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-9 transactions_column">
+            <table class="transactions_table">
+                <thead>
+                <tr>
+                    <th><span>Id</span></th>
+                    <th><span>Amount</span></th>
+                    <th><span>Data</span></th>
+                    <th><span>Comment</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>100.0</td>
+                    <td>24.02.2019</td>
+                    <td>Kek</td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="add_transaction">+</div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'main.js' %}"></script>
+</body>
+</html>
