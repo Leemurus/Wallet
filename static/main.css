@@ -3,8 +3,13 @@ html, body {
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+.main_div {
     background-color: #27263D;
 }
+
+/* ============================= WALLETS ============================= */
 
 .wallets_column {
     height: 100%;
@@ -41,6 +46,8 @@ html, body {
     cursor: pointer;
 }
 
+/* ============================= TRANSACTION ============================= */
+
 .transactions_column {
     height: 100%;
     background-color: #8B7AA8;
@@ -65,14 +72,87 @@ html, body {
     font-size: 1.3em;
 }
 
-.add_transaction {
+.create_transaction {
     width: 100%;
     height: 35px;
     font-size: 1.3em;
     text-align: center;
 }
 
-.add_transaction:hover {
+.create_transaction:hover {
     background-color: darkseagreen;
     cursor: pointer;
+}
+
+/* ============================= INPUTS ============================= */
+
+.dark_background {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: black;
+    opacity: 0.6;
+    top: 0;
+}
+
+/* ============================= WALLET INPUTS ============================= */
+
+.wallets_inputs {
+    display: none;
+    top: calc(50% - 5em);
+    left: calc(50% - 10em);
+    width: 20em;
+    height: 10em;
+    position: absolute;
+    border-radius: 1em;
+    background-color: darkseagreen;
+    text-align: center;
+}
+
+.wallets_inputs .title {
+    font-size: 1.5em;
+    margin-right: 5px;
+}
+
+.wallets_inputs .create_button {
+    margin-top: 30px;
+}
+
+.close {
+    margin-right: 5px;
+    font-size: 2em;
+}
+
+.edit_wallet {
+    margin-top: 7px;
+    font-size: 1.1em;
+}
+
+.close:hover, .edit_wallet:hover {
+    cursor: pointer;
+}
+
+/* ============================= TRANSACTION INPUTS ============================= */
+
+.transactions_inputs {
+    display: none;
+    top: calc(50% - 6.5em);
+    left: calc(50% - 14em);
+    width: 28em;
+    height: 13em;
+    position: absolute;
+    border-radius: 1em;
+    background-color: darkseagreen;
+    text-align: center;
+}
+
+.transactions_inputs .title {
+    font-size: 1.1em;
+    margin-right: 5px;
+}
+
+.transactions_inputs .create_button {
+    margin-top: 23px;
+    width: 200px;
 }

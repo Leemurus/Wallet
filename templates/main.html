@@ -6,20 +6,29 @@
     <meta charset="UTF-8">
     <title>Wallet</title>
     <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
-<div class="container-fluid h-100">
+<div class="container-fluid h-100 main_div">
     <div class="row justify-content-center h-100 w-100">
         <div class="col-md-2 wallets_column">
             <ul class="wallets">
                 <li>
+                    <button type="button" class="close delete_wallet" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    <button type="button" class="close edit_wallet" aria-label="Edit">
+                        <span aria-hidden="true">&#x270f;</span>
+                    </button>
+
                     <div class="wallet">
                         <span>Title: </span> <span class="title">First</span> <br>
                         <span>Amount: </span> <span class="amount">123.334</span>
                     </div>
                 </li>
+
                 <li>
                     <div class="create_wallet">+</div>
                 </li>
@@ -41,14 +50,62 @@
                     <td>1</td>
                     <td>100.0</td>
                     <td>24.02.2019</td>
-                    <td>Kek</td>
+                    <td>Fun</td>
                 </tr>
                 </tbody>
             </table>
-            <div class="add_transaction">+</div>
+            <div class="create_transaction">+</div>
         </div>
     </div>
 </div>
+
+{# ============================================== HIDDEN BLOCKS ============================================== #}
+
+<div class="dark_background"></div>
+
+<div class="wallets_inputs">
+    <button type="button" class="close close_wallets_inputs_button" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    <h2>Create wallet</h2>
+
+    <form class="wallets_inputs_form" method="post">
+        <span class="title">Title</span><input type="text">
+        <input type="submit" value="Create" class="btn btn-info create_button">
+    </form>
+</div>
+
+<div class="transactions_inputs">
+    <button type="button" class="close close_transaction_inputs_button" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+
+    <h2>Create transaction</h2>
+
+    <form class="transactions_inputs_form" method="post">
+        <table>
+            <tr>
+                <td><span class="title">Title of wallet</span></td>
+                <td><input type="text"></td>
+            </tr>
+
+            <tr>
+                <td><span class="title">Amount for transaction</span></td>
+                <td><input type="number"></td>
+            </tr>
+
+            <tr>
+                <td><span class="title">Comment</span></td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+
+        <input type="submit" value="Create" class="btn btn-info create_button">
+    </form>
+</div>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="{% static 'main.js' %}"></script>
 </body>
