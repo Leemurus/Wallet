@@ -1,4 +1,5 @@
 import json
+import decimal
 from django.http import HttpResponse, HttpResponseServerError
 from django.utils import timezone
 
@@ -12,23 +13,27 @@ def add_transaction(request):
 
         try:
             wallet_title = str(json_data['wallet_title'])
-            amount = json_data['amount']
+            amount_str = str(json_data['amount'])
             comment = str(json_data['comment'])
             wallet = Wallet.get_wallet(wallet_title)
 
-            if not isinstance(amount, int) or wallet is None:
-                raise ValueError()
+            if not amount_str.replace('.', '', 1).isdigit():
+                raise ValueError('Amount must be float type')
+            if wallet is None:
+                raise ValueError('Wallet name is incorrect')
+            if decimal.Decimal(amount_str) == 0:
+                raise ValueError('Amount must be less than or greater than 0')
 
             wallet.add_transaction(
-                wallet=wallet, amount=amount,
+                wallet=wallet, amount=decimal.Decimal(amount_str),
                 date=timezone.now(), comment=comment
             )
-        except KeyError and ValueError:
+        except KeyError:
             return HttpResponseServerError('Incorrect data')
+        except ValueError as e:
+            return HttpResponseServerError(e.args[0])
 
         return HttpResponse(json.dumps('Ok'), content_type='application/json')
-
-    return HttpResponse()
 
 
 def delete_transaction(request):
@@ -41,13 +46,16 @@ def delete_transaction(request):
             if not isinstance(id, int):
                 raise ValueError()
 
-            Wallet.objects.get(id=id).delete()
-        except KeyError and ValueError and Wallet.DoesNotExist:
+            transaction = Transaction.objects.get(id=id)
+            transaction.wallet.delete_transaction(transaction)
+        except KeyError:
             return HttpResponseServerError('Incorrect data')
+        except ValueError:
+            return HttpResponseServerError('Id must be integer type')
+        except Transaction.DoesNotExist:
+            return HttpResponseServerError('This transaction does not exist')
 
         return HttpResponse(json.dumps('Ok'), content_type='application/json')
-
-    return HttpResponse()
 
 
 def get_transactions_by_wallet(request):
@@ -61,15 +69,15 @@ def get_transactions_by_wallet(request):
                 raise ValueError()
 
             wallet = Wallet.objects.get(id=id)
-        except KeyError and ValueError:
+        except KeyError:
             return HttpResponseServerError('Incorrect data')
-        else:
-            return HttpResponse(
-                list_to_json(wallet.transaction_set.all()),
-                content_type='application/json'
-            )
+        except ValueError:
+            return HttpResponseServerError('Id must be integer type')
+        except Wallet.DoesNotExist:
+            return HttpResponseServerError('This wallet does not exist')
 
-    return HttpResponse()
+        return HttpResponse(list_to_json(wallet.transaction_set.all()),
+                            content_type='application/json')
 
 
 def get_all_transactions(request):

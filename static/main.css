@@ -32,6 +32,7 @@ html, body {
     border: 0.5px solid black;
     border-radius: 0.5em;
     margin-bottom: 5px;
+    word-break: break-all;
 }
 
 .wallets li .create_wallet {
@@ -71,6 +72,7 @@ html, body {
 .transactions_table tr td {
     border: 1px solid black;
     font-size: 1.3em;
+    word-break: break-all;
 }
 
 .create_transaction {
@@ -99,7 +101,7 @@ html, body {
 
 /* ============================= WALLET INPUTS ============================= */
 
-.create_wallets_inputs {
+.create_wallets_inputs, .edit_wallets_inputs {
     display: none;
     top: calc(50% - 5em);
     left: calc(50% - 10em);
@@ -111,12 +113,12 @@ html, body {
     text-align: center;
 }
 
-.create_wallets_inputs .title {
+.create_wallets_inputs .title, .edit_wallets_inputs .title {
     font-size: 1.5em;
     margin-right: 5px;
 }
 
-.create_wallets_inputs .create_button {
+.create_wallets_inputs .create_button, .edit_wallets_inputs .create_button {
     margin-top: 30px;
 }
 

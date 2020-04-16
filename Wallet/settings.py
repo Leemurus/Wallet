@@ -9,8 +9,7 @@ SECRET_KEY = 'u*n**w$xgtjmcmmla4p#&&tf@-t(2q4n0q$28odvh%e&*gfco@'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['0.0.0.0', '192.168.43.86']
 
 INSTALLED_APPS = [
     'Wallet.apps.main.apps.MainConfig',
@@ -53,14 +52,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Wallet.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -76,7 +73,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 LANGUAGE_CODE = 'en-us'
 

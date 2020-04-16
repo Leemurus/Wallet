@@ -18,12 +18,12 @@ def create_wallet(request):
                 raise ValueError()
 
             Wallet(title=wallet_title).save()
-        except KeyError and ValueError:
+        except KeyError:
             return HttpResponseServerError('Incorrect data')
+        except ValueError:
+            return HttpResponseServerError('This name is already taken')
 
         return HttpResponse(json.dumps('Ok'), content_type='application/json')
-
-    return HttpResponse()
 
 
 def delete_wallet(request):
@@ -31,19 +31,20 @@ def delete_wallet(request):
         json_data = json.loads(request.body)
 
         try:
-            wallet_title = str(json_data['wallet_title'])
-            wallet = Wallet.get_wallet(wallet_title)
+            id = json_data['id']
 
-            if wallet is None:
+            if not isinstance(id, int):
                 raise ValueError()
 
-            wallet.delete()
-        except KeyError and ValueError:
+            Wallet.objects.get(id=id).delete()
+        except KeyError:
             return HttpResponseServerError('Incorrect data')
+        except ValueError:
+            return HttpResponseServerError('Id must be integer type')
+        except Wallet.DoesNotExist:
+            return HttpResponseServerError('This wallet does not exist')
 
         return HttpResponse(json.dumps('Ok'), content_type='application/json')
-
-    return HttpResponse()
 
 
 def edit_wallet(request):
@@ -51,19 +52,24 @@ def edit_wallet(request):
         json_data = json.loads(request.body)
 
         try:
-            wallet_title = str(json_data['wallet_title'])
-            wallet = Wallet.get_wallet(wallet_title)
+            id = json_data['id']
+            wallet_title = str(json_data['title'])
 
-            if wallet is None:
-                raise ValueError()
+            if not isinstance(id, int):
+                raise ValueError('Id must be integer type')
 
-            wallet.edit_title(wallet_title)
-        except KeyError and ValueError:
+            if len(Wallet.objects.filter(title=wallet_title)):
+                raise ValueError('This name is already taken')
+
+            Wallet.objects.get(id=id).edit_title(wallet_title)
+        except KeyError:
             return HttpResponseServerError('Incorrect data')
+        except ValueError as e:
+            return HttpResponseServerError(e.args[0])
+        except Wallet.DoesNotExist:
+            return HttpResponseServerError('This wallet does not exist')
 
         return HttpResponse(json.dumps('Ok'), content_type='application/json')
-
-    return HttpResponse()
 
 
 def get_all_wallets(request):
