@@ -14,7 +14,8 @@
     <div class="row justify-content-center h-100 w-100">
         <div class="col-md-2 wallets_column">
             <ul class="wallets">
-                <li>
+                {% for wallet in wallets %}
+                <li class="li_wallets" value="{{ wallet.id }}">
                     <button type="button" class="close delete_wallet" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -24,10 +25,11 @@
                     </button>
 
                     <div class="wallet">
-                        <span>Title: </span> <span class="title">First</span> <br>
-                        <span>Amount: </span> <span class="amount">123.334</span>
+                        <span>Title: </span> <span class="title">{{ wallet.title }}</span> <br>
+                        <span>Amount: </span> <span class="amount">{{ wallet.amount|floatformat:3 }}</span>
                     </div>
                 </li>
+                {% endfor %}
 
                 <li>
                     <div class="create_wallet">+</div>
@@ -46,12 +48,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>100.0</td>
-                    <td>24.02.2019</td>
-                    <td>Fun</td>
+                {% for transaction in transactions %}
+                <tr value="{{ transaction.id }}">
+                    <td>{{ transaction.id }}</td>
+                    <td>{{ transaction.amount|floatformat:5 }}</td>
+                    <td>{{ transaction.date }}</td>
+                    <td>
+                        {{ transaction.comment }}
+                        <button type="button" class="close delete_transaction" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </td>
                 </tr>
+                {% endfor %}
                 </tbody>
             </table>
             <div class="create_transaction">+</div>
@@ -63,41 +72,43 @@
 
 <div class="dark_background"></div>
 
-<div class="wallets_inputs">
+<div class="create_wallets_inputs">
     <button type="button" class="close close_wallets_inputs_button" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 
     <h2>Create wallet</h2>
 
-    <form class="wallets_inputs_form" method="post">
-        <span class="title">Title</span><input type="text">
+    <form class="create_wallets_inputs_form">
+        {% csrf_token %}
+        <span class="title">Title</span><input class="title_input" type="text">
         <input type="submit" value="Create" class="btn btn-info create_button">
     </form>
 </div>
 
-<div class="transactions_inputs">
+<div class="create_transactions_inputs">
     <button type="button" class="close close_transaction_inputs_button" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 
     <h2>Create transaction</h2>
 
-    <form class="transactions_inputs_form" method="post">
+    <form class="create_transactions_inputs_form">
+        {% csrf_token %}
         <table>
             <tr>
                 <td><span class="title">Title of wallet</span></td>
-                <td><input type="text"></td>
+                <td><input class="wallet_title_input" type="text"></td>
             </tr>
 
             <tr>
                 <td><span class="title">Amount for transaction</span></td>
-                <td><input type="number"></td>
+                <td><input class="amount_input" type="number" step="0.01"></td>
             </tr>
 
             <tr>
                 <td><span class="title">Comment</span></td>
-                <td><input type="text"></td>
+                <td><input class="comment_input" type="text"></td>
             </tr>
         </table>
 

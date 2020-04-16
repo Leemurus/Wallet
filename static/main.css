@@ -6,14 +6,14 @@ html, body {
 }
 
 .main_div {
-    background-color: #27263D;
+    background-color: lightgrey;
 }
 
 /* ============================= WALLETS ============================= */
 
 .wallets_column {
     height: 100%;
-    background-color: #8B7AA8;
+    background-color: whitesmoke;
     border-radius: 1em;
     margin-right: 5px;
     overflow-x: hidden;
@@ -26,10 +26,10 @@ html, body {
 
 .wallets li {
     padding-left: 20px;
-    color: white;
+    color: black;
     font-size: 1.5em;
     list-style: none;
-    border: 0.5px solid white;
+    border: 0.5px solid black;
     border-radius: 0.5em;
     margin-bottom: 5px;
 }
@@ -50,25 +50,26 @@ html, body {
 
 .transactions_column {
     height: 100%;
-    background-color: #8B7AA8;
+    background-color: whitesmoke;
     border-radius: 1em;
+    overflow-x: hidden;
 }
 
 .transactions_table {
     margin-top: 5px;
-    border: 1px solid white;
+    border: 1px solid black;
     width: 100%;
-    color: white;
+    color: black;
     max-height: 100%;;
 }
 
 .transactions_table tr th {
-    border: 1px solid white;
+    border: 1px solid black;
     font-size: 1.6em;
 }
 
 .transactions_table tr td {
-    border: 1px solid white;
+    border: 1px solid black;
     font-size: 1.3em;
 }
 
@@ -98,7 +99,7 @@ html, body {
 
 /* ============================= WALLET INPUTS ============================= */
 
-.wallets_inputs {
+.create_wallets_inputs {
     display: none;
     top: calc(50% - 5em);
     left: calc(50% - 10em);
@@ -110,12 +111,12 @@ html, body {
     text-align: center;
 }
 
-.wallets_inputs .title {
+.create_wallets_inputs .title {
     font-size: 1.5em;
     margin-right: 5px;
 }
 
-.wallets_inputs .create_button {
+.create_wallets_inputs .create_button {
     margin-top: 30px;
 }
 
@@ -135,7 +136,7 @@ html, body {
 
 /* ============================= TRANSACTION INPUTS ============================= */
 
-.transactions_inputs {
+.create_transactions_inputs {
     display: none;
     top: calc(50% - 6.5em);
     left: calc(50% - 14em);
@@ -147,12 +148,12 @@ html, body {
     text-align: center;
 }
 
-.transactions_inputs .title {
+.create_transactions_inputs .title {
     font-size: 1.1em;
     margin-right: 5px;
 }
 
-.transactions_inputs .create_button {
+.create_transactions_inputs .create_button {
     margin-top: 23px;
     width: 200px;
 }
